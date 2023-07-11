@@ -19,3 +19,9 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
 !ENTRY org.eclipse.cdt.core 1 0 2023-07-11 16:28:42.597
 !MESSAGE Indexed 'bootloader_CM4' (48 sources, 115 headers) in 6.14 sec: 15,782 declarations; 144,310 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0012%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-07-11 17:28:02.786
+!MESSAGE Indexed 'sample_application_CM4' (48 sources, 115 headers) in 5.62 sec: 15,782 declarations; 144,310 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0012%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-07-11 17:28:05.168
+!MESSAGE Indexed 'sample_application_CM7' (26 sources, 87 headers) in 2.38 sec: 8,639 declarations; 65,803 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0027%)

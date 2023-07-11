@@ -42,9 +42,12 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
+/* Application start address in FLASH */
+#define APP_FLASH_ADDR	0x08040000
+
 /* Bootloader version */
-#define	MAJOR_VER		0
-#define MINOR_VER		1
+#define	B_MAJOR_VER		0
+#define B_MINOR_VER		1
 
 /* USER CODE END PM */
 
@@ -55,7 +58,7 @@ SD_HandleTypeDef hsd1;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-const uint8_t bootloader_ver[2] = { MAJOR_VER, MINOR_VER };
+const uint8_t bootloader_ver[2] = { B_MAJOR_VER, B_MINOR_VER };
 
 /* USER CODE END PV */
 
@@ -134,10 +137,10 @@ Error_Handler();
   MX_USART1_UART_Init();
   MX_SDMMC1_SD_Init();
   /* USER CODE BEGIN 2 */
-  printf("Starting Bootloader v%d.%d (CM7)\n",bootloader_ver[0], bootloader_ver[1]);
+  printf("Starting Bootloader v%d.%d (CM7)\r\n",bootloader_ver[0], bootloader_ver[1]);
 
   /* Jump to applicationdirectly for now */
-//  goto_application();
+  goto_application();
 
   /* USER CODE END 2 */
 
@@ -363,11 +366,11 @@ int fputc(int ch, FILE *f)
 
 static void goto_application()
 {
-	printf("Jumping to application\n");
-	void (*app_reset_hanlder) (void) = (void*) (*(volatile uint32_t *) (0x08000000 + 4U));
+	printf("Jumping to application\r\n");
+	void (*app_reset_hanlder) (void) = (void*) (*(volatile uint32_t *) (APP_FLASH_ADDR + 4U));
 
 	/* Set main stack pointer of application (also done in linkerscript by CubeMX) */
-	__set_MSP((*(volatile uint32_t *) 0x08000000));
+	__set_MSP((*(volatile uint32_t *) APP_FLASH_ADDR));
 
 	/* Call app reset handler */
 	app_reset_hanlder();

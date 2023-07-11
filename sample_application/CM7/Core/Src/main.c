@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 
 /* USER CODE END Includes */
 
@@ -40,6 +41,9 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
+/* Application version */
+#define	A_MAJOR_VER		0
+#define A_MINOR_VER		1
 
 /* USER CODE END PM */
 
@@ -48,6 +52,7 @@
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
+const uint8_t application_ver[2] = { A_MAJOR_VER, A_MINOR_VER };
 
 /* USER CODE END PV */
 
@@ -123,6 +128,7 @@ Error_Handler();
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  printf("Starting Application v%d.%d (CM7)\r\n",application_ver[0], application_ver[1]);
 
   /* USER CODE END 2 */
 
@@ -133,6 +139,20 @@ Error_Handler();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+	  HAL_Delay(300);
+
+	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+	  HAL_Delay(300);
+
+	  HAL_GPIO_TogglePin(LED3_GPIO_Port, LED3_Pin);
+	  HAL_Delay(300);
+
+	  HAL_GPIO_TogglePin(LED4_GPIO_Port, LED4_Pin);
+	  HAL_Delay(300);
+
+	  printf("Application running...\r\n");
+	  HAL_Delay(600);
   }
   /* USER CODE END 3 */
 }
@@ -276,6 +296,20 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+/**
+  * @brief Print a character to UART ( to be used by printf).
+  * @retval int
+  */
+#ifdef __GNUC__
+int __io_putchar(int ch)
+#else
+int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
+{
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+
+  return ch;
+}
 
 /* USER CODE END 4 */
 

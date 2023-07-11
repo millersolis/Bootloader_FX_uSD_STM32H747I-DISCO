@@ -1,0 +1,4 @@
+../FileX/App/app_filex.c:87:6:MX_FileX_Init	64	static
+../FileX/App/app_filex.c:141:6:fx_app_thread_entry	128	static
+../FileX/App/app_filex.c:344:9:SD_IsDetected	24	static
+../FileX/App/app_filex.c:372:6:HAL_GPIO_EXTI_Callback	24	static

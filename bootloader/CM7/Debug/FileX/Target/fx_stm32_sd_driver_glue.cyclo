@@ -1,0 +1,7 @@
+fx_stm32_sd_driver_glue.c:31:5:fx_stm32_sd_init	1
+fx_stm32_sd_driver_glue.c:55:5:fx_stm32_sd_deinit	1
+fx_stm32_sd_driver_glue.c:80:5:fx_stm32_sd_get_status	2
+fx_stm32_sd_driver_glue.c:108:5:fx_stm32_sd_read_blocks	2
+fx_stm32_sd_driver_glue.c:135:5:fx_stm32_sd_write_blocks	2
+fx_stm32_sd_driver_glue.c:159:6:HAL_SD_TxCpltCallback	1
+fx_stm32_sd_driver_glue.c:177:6:HAL_SD_RxCpltCallback	1

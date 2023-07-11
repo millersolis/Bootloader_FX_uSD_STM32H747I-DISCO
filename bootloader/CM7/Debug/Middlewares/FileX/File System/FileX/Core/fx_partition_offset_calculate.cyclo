@@ -1,0 +1,3 @@
+fx_partition_offset_calculate.c:129:7:_fx_partition_offset_calculate	24
+fx_partition_offset_calculate.c:319:7:_fx_utility_partition_get	3
+fx_partition_offset_calculate.c:423:7:_fx_partition_offset_calculate_extended	35

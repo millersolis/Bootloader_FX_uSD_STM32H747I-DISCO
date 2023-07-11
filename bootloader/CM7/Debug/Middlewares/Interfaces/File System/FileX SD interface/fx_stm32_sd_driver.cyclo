@@ -1,0 +1,4 @@
+fx_stm32_sd_driver.c:36:12:check_sd_status	3
+fx_stm32_sd_driver.c:57:7:fx_stm32_sd_driver	20
+fx_stm32_sd_driver.c:258:13:sd_read_data	12
+fx_stm32_sd_driver.c:342:13:sd_write_data	12

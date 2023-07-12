@@ -1,17 +1,10 @@
-20:41:35 **** Incremental Build of configuration Debug for project sample_application_CM7 ****
+21:05:17 **** Incremental Build of configuration Debug for project sample_application_CM7 ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H747xx -c -I../Core/Inc -I../../Middlewares/ST/filex/common/inc -I../../Middlewares/ST/filex/ports/generic/inc -I../../Middlewares/ST/threadx/common/inc -I../../Middlewares/ST/threadx/ports/cortex_m7/gnu/inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "sample_application_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\mille\Sandbox\Bootloader_FX_uSD_STM32H747I-DISCO\sample_application\CM7\STM32H747XIHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sample_application_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: sample_application_CM7.elf
- 
 arm-none-eabi-size   sample_application_CM7.elf 
-arm-none-eabi-objdump -h -S  sample_application_CM7.elf  > "sample_application_CM7.list"
    text	   data	    bss	    dec	    hex	filename
-  26692	    124	   1740	  28556	   6f8c	sample_application_CM7.elf
+  26612	    124	   1740	  28476	   6f3c	sample_application_CM7.elf
 Finished building: default.size.stdout
  
-Finished building: sample_application_CM7.list
- 
 
-20:41:36 Build Finished. 0 errors, 0 warnings. (took 969ms)
+21:05:17 Build Finished. 0 errors, 0 warnings. (took 245ms)
 

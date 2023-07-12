@@ -58,6 +58,8 @@ SD_HandleTypeDef hsd1;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
+extern TIM_HandleTypeDef htim6;
+
 const uint8_t bootloader_ver[2] = { B_MAJOR_VER, B_MINOR_VER };
 
 /* USER CODE END PV */
@@ -368,6 +370,48 @@ static void goto_application()
 {
 	printf("Jumping to application\r\n");
 	void (*app_reset_hanlder) (void) = (void*) (*(volatile uint32_t *) (APP_FLASH_ADDR + 4U));
+
+	/* Deinitialize peripherals before jump */
+	HAL_SD_DeInit(&hsd1);
+	HAL_UART_DeInit(&huart1);
+
+	/* TODO: Replace by HAL GPIO DeInit function */
+	__HAL_RCC_GPIOF_CLK_DISABLE();
+	__HAL_RCC_GPIOH_CLK_DISABLE();
+	__HAL_RCC_GPIOI_CLK_DISABLE();
+	__HAL_RCC_GPIOA_CLK_DISABLE();
+	__HAL_RCC_GPIOE_CLK_DISABLE();
+	__HAL_RCC_GPIOC_CLK_DISABLE();
+	__HAL_RCC_GPIOG_CLK_DISABLE();
+	__HAL_RCC_GPIOB_CLK_DISABLE();
+	__HAL_RCC_HSEM_CLK_DISABLE();
+
+	HAL_RCC_DeInit();
+	HAL_TIM_Base_DeInit(&htim6);
+
+	/* Stop all interrupts */
+	__disable_irq();
+
+	/* TODO: Why 8 registers? */
+	/* Disable IRQs */
+	for (int i = 0; i < 8; i++) {
+		NVIC->ICER[i] = 0xFFFFFFFF;
+	}
+
+	/* Clear pending IRQs */
+	for (int i = 0; i < 8; i++) {
+		NVIC->ICPR[i] = 0xFFFFFFFF;
+	}
+
+	/* Reenable all interrupts */
+	__enable_irq();
+
+	/* Disable Systick timer interrupt*/
+	SysTick->CTRL = 0;
+
+	/* TODO: Why is CR needed to be set to 0? */
+	/* Change from PSP to MSP */
+	__set_CONTROL(0);
 
 	/* Set main stack pointer of application (also done in linkerscript by CubeMX) */
 	__set_MSP((*(volatile uint32_t *) APP_FLASH_ADDR));

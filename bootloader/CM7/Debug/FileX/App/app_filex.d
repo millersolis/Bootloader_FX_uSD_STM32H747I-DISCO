@@ -40,7 +40,7 @@ FileX/App/app_filex.o: ../FileX/App/app_filex.c ../FileX/App/app_filex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../Core/Inc/main.h
+ ../Core/Inc/fw_update.h
 ../FileX/App/app_filex.h:
 ../../Middlewares/ST/filex/common/inc/fx_api.h:
 ../../Middlewares/ST/filex/ports/generic/inc/fx_port.h:
@@ -85,4 +85,4 @@ FileX/App/app_filex.o: ../FileX/App/app_filex.c ../FileX/App/app_filex.h \
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-../Core/Inc/main.h:
+../Core/Inc/fw_update.h:

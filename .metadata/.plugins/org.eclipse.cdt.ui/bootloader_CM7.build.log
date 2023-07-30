@@ -1,17 +1,22 @@
-21:43:37 **** Incremental Build of configuration Debug for project bootloader_CM7 ****
+18:52:25 **** Incremental Build of configuration Debug for project bootloader_CM7 ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H747xx -DTX_INCLUDE_USER_DEFINE_FILE -DFX_INCLUDE_USER_DEFINE_FILE -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../AZURE_RTOS/App -I../FileX/App -I../FileX/Target -I../../Middlewares/ST/filex/common/inc/ -I../../Middlewares/ST/filex/ports/generic/inc/ -I../../Middlewares/ST/threadx/common/inc/ -I../../Middlewares/ST/threadx/ports/cortex_m7/gnu/inc/ -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/fw_update.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H747xx -DTX_INCLUDE_USER_DEFINE_FILE -DFX_INCLUDE_USER_DEFINE_FILE -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../AZURE_RTOS/App -I../FileX/App -I../FileX/Target -I../../Middlewares/ST/filex/common/inc/ -I../../Middlewares/ST/filex/ports/generic/inc/ -I../../Middlewares/ST/threadx/common/inc/ -I../../Middlewares/ST/threadx/ports/cortex_m7/gnu/inc/ -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/fw_update.d" -MT"Core/Src/fw_update.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fw_update.o"
+arm-none-eabi-gcc "../Core/Src/sd_card.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H747xx -DTX_INCLUDE_USER_DEFINE_FILE -DFX_INCLUDE_USER_DEFINE_FILE -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../AZURE_RTOS/App -I../FileX/App -I../FileX/Target -I../../Middlewares/ST/filex/common/inc/ -I../../Middlewares/ST/filex/ports/generic/inc/ -I../../Middlewares/ST/threadx/common/inc/ -I../../Middlewares/ST/threadx/ports/cortex_m7/gnu/inc/ -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_card.d" -MT"Core/Src/sd_card.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_card.o"
+../Core/Src/fw_update.c: In function 'fw_update_thread_entry':
+../Core/Src/fw_update.c:18:3: warning: implicit declaration of function 'sd_update_card_state' [-Wimplicit-function-declaration]
+   18 |   sd_update_card_state();
+      |   ^~~~~~~~~~~~~~~~~~~~
 arm-none-eabi-gcc -o "bootloader_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\mille\Sandbox\Bootloader_FX_uSD_STM32H747I-DISCO\bootloader\CM7\STM32H747XIHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="bootloader_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: bootloader_CM7.elf
  
 arm-none-eabi-size   bootloader_CM7.elf 
 arm-none-eabi-objdump -h -S  bootloader_CM7.elf  > "bootloader_CM7.list"
    text	   data	    bss	    dec	    hex	filename
-  98380	    220	  88664	 187264	  2db80	bootloader_CM7.elf
+  76988	    224	  88184	 165396	  28614	bootloader_CM7.elf
 Finished building: default.size.stdout
  
 Finished building: bootloader_CM7.list
  
 
-21:43:40 Build Finished. 0 errors, 0 warnings. (took 2s.271ms)
+18:52:27 Build Finished. 0 errors, 1 warnings. (took 2s.400ms)
 

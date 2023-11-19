@@ -1,0 +1,45 @@
+/*
+ * fw_update.c
+ *
+ *  Created on: Jul 30, 2023
+ *      Author: mille
+ */
+
+#include "fw_update.h"
+
+#include <stdbool.h>
+#include "sd_card.h"
+
+
+/**
+  * @brief Write data to the Application's actual flash location.
+  * @param data data to be written
+  * @param data_len data length
+  * @is_first_block true - if this is first block, false - not first block
+  * @retval True if write to IFLASH success. False otherwise.
+  */
+static _Bool write_data_to_app_flash(uint8_t *data, uint16_t data_len, _Bool is_first_block)
+{
+
+}
+
+
+/* Thread entry function for firmware update thread */
+void fw_update_thread_entry(void)
+{
+	sd_init();
+
+	// Since we started the OS, it means user wants to update if FW avail. in uSD
+
+
+	// Read file from uSD
+
+
+	// Write to internal FLASH
+
+	// Jump to app (old or new if updated)
+	do {
+
+	} while(false);
+}
+

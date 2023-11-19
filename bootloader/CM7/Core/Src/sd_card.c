@@ -127,8 +127,9 @@ void sd_print_to_file(char* filename, uint8_t* buf, uint8_t len /*, TX_SEMAPHORE
 	copy_mem((void*)buf, (void*)sd_write_buf, U_MIN(len, sd_write_buf_len));
 	sd_write_buf[sd_write_buf_len -1] = '\0';	// Ensure buf is null terminated to use strlen later
 
-
-}
+	// Write buffer to file
+	sd_fx_file_write(filename);
+}	// UNUSED FOR NOW (not tested) [Miller]
 
 /* To be called by a single thread (FileX app thread currently)
  * because it writes to the sd_write_buf without mutex.
@@ -146,9 +147,13 @@ void sd_print_to_file_CR(char* filename, uint8_t* buf, uint8_t len /*, TX_SEMAPH
 	copy_mem((void*)buf, (void*)&sd_write_buf[idx], U_MIN(len, sd_write_buf_len - idx));
 	sd_write_buf[sd_write_buf_len -1] = '\0';	// Ensure buf is null terminated to use strlen later
 
+	// Write buffer to file
+	sd_fx_file_write(filename);
+}	// UNUSED FOR NOW (not tested) [Miller]
 
-}
-
+/* To be called by a single thread (FileX app thread currently)
+ * because it writes to the sd_write_buf without mutex.
+ */
 void sd_create_file(char* filename /*, TX_SEMAPHORE* sem_notify*/)
 {
 	sd_update_card_state();

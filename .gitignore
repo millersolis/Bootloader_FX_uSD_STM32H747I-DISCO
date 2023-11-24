@@ -1,0 +1,21 @@
+.metadata
+
+# layer one project-related stuff
+/*/.settings/
+/*/Debug/
+/*/Release/
+# /*/.mxproject
+/*/*.launch
+/*/*.log
+/*/*.scratch
+/*/.metadata
+
+# layer two project-related stuff
+/*/*/.settings/
+/*/*/Debug/
+/*/*/Release/
+# /*/*/.mxproject
+/*/*/*.launch
+/*/*/*.log
+/*/*/*.scratch
+/*/*/.metadata

@@ -1,4 +1,0 @@
-C:/Users/mille/Sandbox/Bootloader_FX_uSD_STM32H747I-DISCO/bootloader/Middlewares/ST/filex/common/drivers/fx_stm32_sd_driver.c:36:12:check_sd_status	24	static
-C:/Users/mille/Sandbox/Bootloader_FX_uSD_STM32H747I-DISCO/bootloader/Middlewares/ST/filex/common/drivers/fx_stm32_sd_driver.c:57:7:fx_stm32_sd_driver	32	static
-C:/Users/mille/Sandbox/Bootloader_FX_uSD_STM32H747I-DISCO/bootloader/Middlewares/ST/filex/common/drivers/fx_stm32_sd_driver.c:258:13:sd_read_data	72	static,ignoring_inline_asm
-C:/Users/mille/Sandbox/Bootloader_FX_uSD_STM32H747I-DISCO/bootloader/Middlewares/ST/filex/common/drivers/fx_stm32_sd_driver.c:342:13:sd_write_data	72	static,ignoring_inline_asm

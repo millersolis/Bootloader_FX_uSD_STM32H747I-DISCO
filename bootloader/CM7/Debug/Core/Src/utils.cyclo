@@ -1,3 +1,0 @@
-utils.c:11:6:zero_mem	2
-utils.c:21:5:copy_mem	2
-utils.c:35:5:str_len	2

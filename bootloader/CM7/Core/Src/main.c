@@ -42,9 +42,12 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
+/* Application start address in FLASH */
+#define APP_FLASH_ADDR	0x08040000
+
 /* Bootloader version */
-#define	MAJOR_VER		0
-#define MINOR_VER		1
+#define	B_MAJOR_VER		0
+#define B_MINOR_VER		1
 
 /* USER CODE END PM */
 
@@ -55,7 +58,9 @@ SD_HandleTypeDef hsd1;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-const uint8_t bootloader_ver[2] = { MAJOR_VER, MINOR_VER };
+extern TIM_HandleTypeDef htim6;
+
+const uint8_t bootloader_ver[2] = { B_MAJOR_VER, B_MINOR_VER };
 
 /* USER CODE END PV */
 
@@ -134,10 +139,10 @@ Error_Handler();
   MX_USART1_UART_Init();
   MX_SDMMC1_SD_Init();
   /* USER CODE BEGIN 2 */
-  printf("Starting Bootloader v%d.%d (CM7)\n",bootloader_ver[0], bootloader_ver[1]);
+  printf("Starting Bootloader v%d.%d (CM7)\r\n",bootloader_ver[0], bootloader_ver[1]);
 
   /* Jump to applicationdirectly for now */
-//  goto_application();
+  goto_application();
 
   /* USER CODE END 2 */
 
@@ -363,11 +368,53 @@ int fputc(int ch, FILE *f)
 
 static void goto_application()
 {
-	printf("Jumping to application\n");
-	void (*app_reset_hanlder) (void) = (void*) (*(volatile uint32_t *) (0x08000000 + 4U));
+	printf("Jumping to application\r\n");
+	void (*app_reset_hanlder) (void) = (void*) (*(volatile uint32_t *) (APP_FLASH_ADDR + 4U));
+
+	/* Deinitialize peripherals before jump */
+	HAL_SD_DeInit(&hsd1);
+	HAL_UART_DeInit(&huart1);
+
+	/* TODO: Replace by HAL GPIO DeInit function */
+	__HAL_RCC_GPIOF_CLK_DISABLE();
+	__HAL_RCC_GPIOH_CLK_DISABLE();
+	__HAL_RCC_GPIOI_CLK_DISABLE();
+	__HAL_RCC_GPIOA_CLK_DISABLE();
+	__HAL_RCC_GPIOE_CLK_DISABLE();
+	__HAL_RCC_GPIOC_CLK_DISABLE();
+	__HAL_RCC_GPIOG_CLK_DISABLE();
+	__HAL_RCC_GPIOB_CLK_DISABLE();
+	__HAL_RCC_HSEM_CLK_DISABLE();
+
+	HAL_RCC_DeInit();
+	HAL_TIM_Base_DeInit(&htim6);
+
+	/* Stop all interrupts */
+	__disable_irq();
+
+	/* TODO: Why 8 registers? */
+	/* Disable IRQs */
+	for (int i = 0; i < 8; i++) {
+		NVIC->ICER[i] = 0xFFFFFFFF;
+	}
+
+	/* Clear pending IRQs */
+	for (int i = 0; i < 8; i++) {
+		NVIC->ICPR[i] = 0xFFFFFFFF;
+	}
+
+	/* Reenable all interrupts */
+	__enable_irq();
+
+	/* Disable Systick timer interrupt*/
+	SysTick->CTRL = 0;
+
+	/* TODO: Why is CR needed to be set to 0? */
+	/* Change from PSP to MSP */
+	__set_CONTROL(0);
 
 	/* Set main stack pointer of application (also done in linkerscript by CubeMX) */
-	__set_MSP((*(volatile uint32_t *) 0x08000000));
+	__set_MSP((*(volatile uint32_t *) APP_FLASH_ADDR));
 
 	/* Call app reset handler */
 	app_reset_hanlder();

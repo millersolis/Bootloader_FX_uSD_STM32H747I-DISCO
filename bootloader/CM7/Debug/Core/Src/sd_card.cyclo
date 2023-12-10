@@ -4,8 +4,8 @@ sd_card.c:84:6:sd_fx_start	1
 sd_card.c:95:6:sd_fx_stop	1
 sd_card.c:101:6:sd_update_card_state	3
 sd_card.c:122:6:sd_print_to_file	1
-sd_card.c:136:6:sd_print_to_file_CR	1
-sd_card.c:152:6:sd_create_file	3
-sd_card.c:167:6:sd_fx_file_create	3
-sd_card.c:185:6:sd_fx_file_write	6
-sd_card.c:244:9:SD_IsDetected	3
+sd_card.c:137:6:sd_print_to_file_CR	1
+sd_card.c:157:6:sd_create_file	3
+sd_card.c:172:6:sd_fx_file_create	3
+sd_card.c:190:6:sd_fx_file_write	6
+sd_card.c:249:9:SD_IsDetected	3

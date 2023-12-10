@@ -1,1 +1,2 @@
-fw_update.c:13:6:fw_update_thread_entry	1
+fw_update.c:44:14:write_data_to_app_flash	8
+fw_update.c:132:6:fw_update_thread_entry	6

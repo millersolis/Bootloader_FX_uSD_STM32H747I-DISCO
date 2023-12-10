@@ -1,9 +1,9 @@
 main.c:90:5:main	10
-main.c:199:6:SystemClock_Config	4
-main.c:261:13:MX_SDMMC1_SD_Init	2
-main.c:292:13:MX_USART1_UART_Init	5
-main.c:340:13:MX_GPIO_Init	1
-main.c:398:5:__io_putchar	1
-main.c:408:13:goto_application	3
-main.c:475:6:HAL_TIM_PeriodElapsedCallback	2
-main.c:492:6:Error_Handler	1
+main.c:192:6:SystemClock_Config	4
+main.c:254:13:MX_SDMMC1_SD_Init	2
+main.c:285:13:MX_USART1_UART_Init	5
+main.c:333:13:MX_GPIO_Init	1
+main.c:391:5:__io_putchar	1
+main.c:401:13:goto_application	3
+main.c:468:6:HAL_TIM_PeriodElapsedCallback	2
+main.c:485:6:Error_Handler	1

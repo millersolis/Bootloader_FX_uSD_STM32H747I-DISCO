@@ -1,1 +1,2 @@
-../Core/Src/fw_update.c:13:6:fw_update_thread_entry	8	static
+../Core/Src/fw_update.c:44:14:write_data_to_app_flash	56	static
+../Core/Src/fw_update.c:132:6:fw_update_thread_entry	24	static

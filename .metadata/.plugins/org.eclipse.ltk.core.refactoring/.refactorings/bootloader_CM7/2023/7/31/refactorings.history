@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;bootloader_CM7/Core/Src/sd_fw_update.c&apos; to &apos;sd_card.c&apos;" description="Rename resource &apos;sd_fw_update.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Src/sd_fw_update.c" name="sd_card.c" stamp="1690749332657" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;bootloader_CM7/Core/Inc/sd_fw_update.h&apos; to &apos;sd_card.h&apos;" description="Rename resource &apos;sd_fw_update.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/sd_fw_update.h" name="sd_card.h" stamp="1690749342140" updateReferences="true"/>
+</session>

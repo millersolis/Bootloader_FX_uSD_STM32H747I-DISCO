@@ -63,6 +63,8 @@ void Error_Handler(void);
 #define OSC32_OUT_GPIO_Port GPIOC
 #define OSC32_IN_Pin GPIO_PIN_14
 #define OSC32_IN_GPIO_Port GPIOC
+#define JOY_DOWN_Pin GPIO_PIN_3
+#define JOY_DOWN_GPIO_Port GPIOK
 #define SDIO1_CK_Pin GPIO_PIN_12
 #define SDIO1_CK_GPIO_Port GPIOC
 #define SDIO1_CMD_Pin GPIO_PIN_2

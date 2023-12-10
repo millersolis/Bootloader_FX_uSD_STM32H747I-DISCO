@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include <stdbool.h>
 
 /* USER CODE END Includes */
 
@@ -48,6 +49,9 @@
 /* Bootloader version */
 #define	B_MAJOR_VER		0
 #define B_MINOR_VER		1
+
+/* Time to wait for user to press joystick down to flash before jumping to existent app */
+#define TIMEOUT_TO_FLASH_APP	3	/*seconds*/
 
 /* USER CODE END PM */
 
@@ -141,8 +145,36 @@ Error_Handler();
   /* USER CODE BEGIN 2 */
   printf("Starting Bootloader v%d.%d (CM7)\r\n",bootloader_ver[0], bootloader_ver[1]);
 
-  /* Jump to applicationdirectly for now */
-  goto_application();
+  /* Check for button press or timeout */
+  volatile static uint8_t joystick_down_state;
+  volatile static _Bool joystick_held_down = false;
+  volatile uint32_t now = HAL_GetTick();
+  const uint32_t timeout_end = now + (TIMEOUT_TO_FLASH_APP *1000);
+
+  do {
+	  joystick_down_state = HAL_GPIO_ReadPin(JOY_DOWN_GPIO_Port, JOY_DOWN_Pin);
+	  now = HAL_GetTick();
+
+	  /* Check for joystick down */
+	  if ((joystick_down_state != GPIO_PIN_SET)) {
+		  joystick_held_down = true;
+		  break;
+	  }
+  } while(now < timeout_end);
+
+  if (joystick_held_down) {
+	  // flash
+  }
+  else {
+	  /* Jump to applicationdirectly for now */
+	  goto_application();
+  }
+
+
+  /* Should never reach here.
+   * Intentionally spinlock forever before RTOS starts.
+   */
+  Error_Handler();
 
   /* USER CODE END 2 */
 
@@ -313,6 +345,7 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOK_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOI_CLK_ENABLE();
@@ -320,6 +353,12 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOI, LED1_Pin|LED2_Pin|LED3_Pin|LED4_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : JOY_DOWN_Pin */
+  GPIO_InitStruct.Pin = JOY_DOWN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(JOY_DOWN_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : uSD_Detect_Pin */
   GPIO_InitStruct.Pin = uSD_Detect_Pin;
@@ -375,7 +414,7 @@ static void goto_application()
 	HAL_SD_DeInit(&hsd1);
 	HAL_UART_DeInit(&huart1);
 
-	/* TODO: Replace by HAL GPIO DeInit function */
+	/* TODO: Can replace by HAL GPIO DeInit function? */
 	__HAL_RCC_GPIOF_CLK_DISABLE();
 	__HAL_RCC_GPIOH_CLK_DISABLE();
 	__HAL_RCC_GPIOI_CLK_DISABLE();
@@ -418,6 +457,9 @@ static void goto_application()
 
 	/* Call app reset handler */
 	app_reset_hanlder();
+
+	/* Should never reach here */
+	Error_Handler();
 }
 
 /* USER CODE END 4 */

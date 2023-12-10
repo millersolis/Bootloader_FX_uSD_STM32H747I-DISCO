@@ -43,7 +43,7 @@
 /* USER CODE BEGIN PM */
 /* Application version */
 #define	A_MAJOR_VER		0
-#define A_MINOR_VER		1
+#define A_MINOR_VER		2
 
 /* USER CODE END PM */
 
@@ -140,19 +140,15 @@ HAL_HSEM_Release(HSEM_ID_0,0);
 
     /* USER CODE BEGIN 3 */
 	  HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-	  HAL_Delay(300);
 
 	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-	  HAL_Delay(300);
 
 	  HAL_GPIO_TogglePin(LED3_GPIO_Port, LED3_Pin);
-	  HAL_Delay(300);
 
 	  HAL_GPIO_TogglePin(LED4_GPIO_Port, LED4_Pin);
-	  HAL_Delay(300);
 
 	  printf("Application running...\r\n");
-	  HAL_Delay(600);
+	  HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }

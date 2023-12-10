@@ -1,0 +1,20 @@
+/*
+ * utils.c
+ *
+ *  Created on: Jul 30, 2023
+ *      Author: mille
+ */
+
+#include "utils.h"
+
+
+void bb_zero_mem(void* address, int size)
+{
+	unsigned char* p_data=address;
+	int i;
+	for (i=0; i<size; i++)
+	{
+		p_data[i]=0;
+	}
+}
+

@@ -2,6 +2,8 @@
 CAD.formats=
 CAD.pinconfig=
 CAD.provider=
+CORTEX_M7.CPU_DCache=Enabled
+CORTEX_M7.IPParameters=CPU_DCache
 CortexM4.IPs=BDMA,DMA,FATFS_M4\:I,FREERTOS_M4\:I,IWDG2\:I,MDMA,NVIC2\:I,RCC,USB_DEVICE_M4\:I,USB_HOST_M4\:I,WWDG2\:I,DEBUG,PDM2PCM_M4\:I,PWR,RESMGR_UTILITY,SYS_M4\:I,CORTEX_M4\:I,OPENAMP_M4\:I,VREFBUF,GPIO
 CortexM7.IPs=BDMA\:I,DMA\:I,FATFS_M7\:I,FREERTOS_M7\:I,IWDG1\:I,MDMA\:I,NVIC1\:I,RCC\:I,USB_DEVICE_M7\:I,USB_HOST_M7\:I,WWDG1\:I,USART1\:I,CORTEX_M7\:I,DEBUG\:I,PDM2PCM_M7\:I,PWR\:I,RESMGR_UTILITY\:I,SYS\:I,OPENAMP_M7\:I,VREFBUF\:I,GPIO\:I,SDMMC1\:I,STMicroelectronics.X-CUBE-AZRTOS-H7.3.1.0_M7\:I,TIM6\:I
 CortexM7.Pins=PK3,PI8,PI12,PI13,PI14,PI15
@@ -1014,7 +1016,7 @@ ProjectManager.FreePins=false
 ProjectManager.HalAssertFull=false
 ProjectManager.HeapSize=M4-0x200,M7-0x200
 ProjectManager.KeepUserCode=true
-ProjectManager.LastFirmware=true
+ProjectManager.LastFirmware=false
 ProjectManager.LibraryCopy=1
 ProjectManager.MainLocation=Core/Src
 ProjectManager.NoMain=false

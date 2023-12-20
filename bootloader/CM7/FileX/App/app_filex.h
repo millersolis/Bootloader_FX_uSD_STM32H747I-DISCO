@@ -79,6 +79,10 @@ UINT MX_FileX_Init(VOID *memory_ptr);
   #define FX_APP_PREEMPTION_THRESHOLD FX_APP_THREAD_PRIO
 #endif
 
+/* fx sd volume name */
+#ifndef FX_SD_VOLUME_NAME
+  #define FX_SD_VOLUME_NAME "STM32_SDIO_DISK"
+#endif
 
 /* USER CODE BEGIN PD */
 

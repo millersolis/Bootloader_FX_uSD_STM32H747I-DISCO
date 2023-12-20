@@ -1,0 +1,2 @@
+../FileX/App/app_filex.c:127:6:fx_app_thread_entry	8	static
+../FileX/App/app_filex.c:75:6:MX_FileX_Init	48	static

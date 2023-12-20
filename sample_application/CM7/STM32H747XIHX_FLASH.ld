@@ -45,7 +45,12 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 MEMORY
 {
   RAM_D1 (xrw)   : ORIGIN = 0x24000000, LENGTH =  512K
-  FLASH   (rx)   : ORIGIN = 0x08040000, LENGTH = 256K    /* Application is in Sector 2 and 3 of Bank 1. Actual start is 0x08000000 */
+  
+  /* Application is in Sector 2 and 3 of Bank 1. Actual start is 0x08000000 */
+  /* Application address has to be aligned to flash word size to be written to by bootloader */
+  /* Flash word is 256 bits for STM32H74x/5X devices (8x 32bits words) */
+  FLASH   (rx)   : ORIGIN = 0x08040000, LENGTH = 256K
+
   DTCMRAM (xrw)  : ORIGIN = 0x20000000, LENGTH = 128K
   RAM_D2 (xrw)   : ORIGIN = 0x30000000, LENGTH = 288K
   RAM_D3 (xrw)   : ORIGIN = 0x38000000, LENGTH = 64K

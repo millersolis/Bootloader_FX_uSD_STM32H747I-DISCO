@@ -1,10 +1,19 @@
-21:05:17 **** Incremental Build of configuration Debug for project sample_application_CM7 ****
+18:02:33 **** Incremental Build of configuration Release for project sample_application_CM7 ****
 make -j8 all 
+arm-none-eabi-gcc -o "sample_application_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\mille\Sandbox\Bootloader_FX_uSD_STM32H747I-DISCO\sample_application\CM7\STM32H747XIHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sample_application_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: sample_application_CM7.elf
+ 
 arm-none-eabi-size   sample_application_CM7.elf 
+arm-none-eabi-objdump -h -S  sample_application_CM7.elf  > "sample_application_CM7.list"
+arm-none-eabi-objcopy  -O binary  sample_application_CM7.elf  "sample_application_CM7.bin"
    text	   data	    bss	    dec	    hex	filename
-  26612	    124	   1740	  28476	   6f3c	sample_application_CM7.elf
+  17036	    124	   1740	  18900	   49d4	sample_application_CM7.elf
 Finished building: default.size.stdout
  
+Finished building: sample_application_CM7.list
+ 
+Finished building: sample_application_CM7.bin
+ 
 
-21:05:17 Build Finished. 0 errors, 0 warnings. (took 245ms)
+18:02:34 Build Finished. 0 errors, 0 warnings. (took 775ms)
 

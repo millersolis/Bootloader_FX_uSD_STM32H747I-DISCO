@@ -1,0 +1,4 @@
+fw_update.c:134:7:sd_fw_file_exists	1
+fw_update.c:139:7:sd_get_fw_file_size	2
+fw_update.c:149:7:get_sd_fw_chunk	2
+fw_update.c:168:6:fw_update_thread_entry	13

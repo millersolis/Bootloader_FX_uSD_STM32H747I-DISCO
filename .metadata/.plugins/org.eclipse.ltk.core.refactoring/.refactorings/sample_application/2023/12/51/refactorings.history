@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;sample_application/binaries/sample_application_CM7.elf&apos; to &apos;sample_application_CM7v0.2.elf&apos;" description="Rename resource &apos;sample_application_CM7.elf&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="binaries/sample_application_CM7.elf" name="sample_application_CM7v0.2.elf" stamp="1702846514702" updateReferences="true"/>
+</session>

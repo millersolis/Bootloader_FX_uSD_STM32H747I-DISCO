@@ -34,7 +34,7 @@ static FX_MEDIA        	sdio_disk;
 static FX_FILE         	fx_file;
 
 /* Buffer for FileX FX_MEDIA sector cache. */
-ALIGN_32BYTES (uint32_t fx_sd_media_memory[FX_STM32_SD_DEFAULT_SECTOR_SIZE / sizeof(uint32_t)]);
+ALIGN_32BYTES (static uint32_t fx_sd_media_memory[FX_STM32_SD_DEFAULT_SECTOR_SIZE / sizeof(uint32_t)]);
 
 static ULONG last_status = CARD_STATUS_DISCONNECTED;
 static UINT sd_status;
@@ -79,6 +79,13 @@ void sd_init(void)
 		/* SD card is already inserted, place the info into the queue */
 		tx_semaphore_put(&sd_detect_semaphore);
 	 }
+
+	sd_fx_start();
+}
+
+void sd_deinit(void)
+{
+	sd_fx_stop();
 }
 
 void sd_fx_start(void)
@@ -229,6 +236,121 @@ UINT sd_fx_file_write(char* filename)
 	  Error_Handler();
 	}
 
+	sd_status = fx_media_flush(&sdio_disk);
+
+	/* Check the media flush  status.  */
+	if (sd_status != FX_SUCCESS)
+	{
+	  /* Error closing the file, call error handler.  */
+	  Error_Handler();
+	}
+
+	return status;
+}
+
+UINT sd_fx_get_file_size(char* filename, uint32_t* size)
+{
+// Example for FX for reference [Miller]
+	//	FX_MEDIA     my_media;
+	//	UINT         status; attributes; year; month; day;
+	//	CHAR         entry_name[FX_MAX_LONG_NAME_LEN];
+	//	ULONG        size;
+	//	UINT         hour; minute; second;
+	//	/* Retrieve information about the directory entry "myfile.txt".*/
+	//	status = fx_directory_information_get(&my_media, "myfile.txt", &attributes, &size,
+	//	                                      &year, &month, &day,
+	//	                                      &hour, &minute, &second);
+	//	/* If status equals FX_SUCCESS, the directory entry information is available in the local variables. */
+
+	UINT sd_status;
+	UINT         attributes, year, month, day;
+	ULONG        fx_size;
+	UINT         hour, minute, second;
+
+	sd_status = fx_directory_information_get(&sdio_disk, filename, &attributes, &fx_size,
+										  &year, &month, &day,
+										  &hour, &minute, &second);
+
+	if (sd_status != FX_SUCCESS)
+	{
+	  Error_Handler();
+	}
+
+	sd_status = fx_media_flush(&sdio_disk);
+
+
+	// TODO: Is flush needed when getting details? [Miller]
+	/* Check the media flush  status.  */
+	if (sd_status != FX_SUCCESS)
+	{
+	  /* Error closing the file, call error handler.  */
+	  Error_Handler();
+	}
+
+	*size = fx_size;
+
+	return sd_status == FX_SUCCESS;
+}
+
+
+UINT sd_fx_file_read(char* filename, uint8_t* dest_buf, uint32_t buf_size,
+						uint32_t request_size,uint32_t* bytes_read, uint32_t offset)
+{
+// Example from FX for reference [Miller]
+	//	FX_FILE                 my_file;
+	//	unsigned char           my_buffer[1024];
+	//	ULONG                   actual_bytes;
+	//	UINT                    status;
+	//
+	//	/* Read up to 1024 bytes into "my_buffer." */
+	//	status = fx_file_read(&my_file, my_buffer, 1024, &actual_bytes);
+	//
+	//	/* If status equals FX_SUCCESS, "my_buffer" contains the bytes
+	//	    read from the file. The total number of bytes read is in "actual_bytes." */
+
+	// TODO: Check buf size and requested size [Miller]
+
+	UINT status;
+    /* Open the test file.  */
+    status =  fx_file_open(&sdio_disk, &fx_file, filename, FX_OPEN_FOR_READ);
+
+    /* Check the file open status.  */
+    if (status != FX_SUCCESS)
+    {
+      /* Error opening file, call error handler.  */
+      Error_Handler();
+    }
+
+    /* Seek start of test file */
+    status = fx_file_seek(&fx_file, offset);
+
+    /* Check the file seek status.  */
+	if (status != FX_SUCCESS)
+	{
+	/* Error performing file seek, call error handler.  */
+	Error_Handler();
+	}
+
+	/* Read from start of the test file.  */
+	status =  fx_file_read(&fx_file, dest_buf, request_size, bytes_read);
+
+	/* Check the file read status.  */
+	if (status != FX_SUCCESS)
+	{
+	  /* Error reading from a file, call error handler.  */
+	  Error_Handler();
+	}
+	/* Close the test file.  */
+	sd_status =  fx_file_close(&fx_file);
+
+	/* Check the file close status.  */
+	if (sd_status != FX_SUCCESS)
+	{
+	  /* Error closing the file, call error handler.  */
+	  Error_Handler();
+	}
+
+	// TODO: Is flush needed when reading? [Miller]
 	sd_status = fx_media_flush(&sdio_disk);
 
 	/* Check the media flush  status.  */

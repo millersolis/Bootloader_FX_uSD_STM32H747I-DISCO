@@ -74,7 +74,6 @@ static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_SDMMC1_SD_Init(void);
 /* USER CODE BEGIN PFP */
-static void goto_application();
 
 /* USER CODE END PFP */
 
@@ -95,6 +94,9 @@ int main(void)
 /* USER CODE BEGIN Boot_Mode_Sequence_0 */
   int32_t timeout;
 /* USER CODE END Boot_Mode_Sequence_0 */
+
+  /* Enable D-Cache---------------------------------------------------------*/
+  SCB_EnableDCache();
 
 /* USER CODE BEGIN Boot_Mode_Sequence_1 */
   /* Wait until CPU2 boots and enters in stop mode or timeout*/
@@ -178,8 +180,7 @@ Error_Handler();
   while (1)
   {
     /* USER CODE END WHILE */
-	  /* Should never reach here */
-	  Error_Handler();
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -398,7 +399,7 @@ int fputc(int ch, FILE *f)
   return ch;
 }
 
-static void goto_application()
+void goto_application()
 {
 	printf("Jumping to application\r\n");
 	void (*app_reset_hanlder) (void) = (void*) (*(volatile uint32_t *) (APP_FLASH_ADDR + 4U));

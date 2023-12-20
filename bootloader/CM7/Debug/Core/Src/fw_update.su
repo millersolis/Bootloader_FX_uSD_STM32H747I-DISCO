@@ -1,2 +1,5 @@
-../Core/Src/fw_update.c:44:14:write_data_to_app_flash	56	static
-../Core/Src/fw_update.c:132:6:fw_update_thread_entry	24	static
+../Core/Src/fw_update.c:49:14:write_data_to_app_flash	64	static
+../Core/Src/fw_update.c:134:7:sd_fw_file_exists	4	static
+../Core/Src/fw_update.c:139:7:sd_get_fw_file_size	16	static
+../Core/Src/fw_update.c:149:7:get_sd_fw_chunk	32	static
+../Core/Src/fw_update.c:168:6:fw_update_thread_entry	40	static

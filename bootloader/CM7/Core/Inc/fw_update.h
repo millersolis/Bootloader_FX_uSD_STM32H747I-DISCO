@@ -8,6 +8,8 @@
 #ifndef INC_FW_UPDATE_H_
 #define INC_FW_UPDATE_H_
 
+
+// App address has to be aligned to a flash word -> 256-bit aligned
 #define APP_FLASH_ADDR 0x08040000	// Bank1 - Sector 2 & Sector 3: Application (starting at 0x08040000)
 
 
